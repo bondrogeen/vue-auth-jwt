@@ -1,0 +1,83 @@
+// Ref: https://github.com/nuxt-community/vuetify-module#customvariables
+//
+// The variables you want to modify
+// $font-size-root: 16px;
+
+$spacer: 5px;
+$grid-gutter: 20px;
+
+$primary: (
+  'base': #4e60ff,
+  'lighten-1': #f3f4ff,
+  'lighten-2': #f4f5f6,
+  'darken-1': #697bff,
+  'darken-2': #818f99,
+);
+
+$red: (
+  'base': #e74c3c,
+  'lighten-1': #f7eceb,
+  'lighten-2': #dba09a,
+  'darken-1': #c23222,
+  'darken-2': #81170b,
+);
+
+$grey: (
+  'base': #999,
+);
+
+$black: #000;
+$white: #fff;
+
+$btn-sizes: (
+  'default': 40,
+  'small': 30,
+  'x-small': 24,
+  'large': 48,
+  'x-large': 56,
+);
+
+$headings: (
+  'h1': (
+    'size': 40px,
+    'weight': 700,
+    'line-height': 140%,
+    'letter-spacing': 0,
+    'text-transform': false,
+  ),
+  'h2': (
+    'size': 30px,
+    'weight': 700,
+    'line-height': 140%,
+    'letter-spacing': 0,
+    'text-transform': false,
+  ),
+  'h3': (
+    'size': 24px,
+    'weight': 700,
+    'line-height': 140%,
+    'letter-spacing': 0,
+    'text-transform': false,
+  ),
+  'subtitle-1': (
+    'size': 18px,
+    'weight': 500,
+    'line-height': 140%,
+    'letter-spacing': 0,
+    'text-transform': false,
+  ),
+  'body-1': (
+    'size': 16px,
+    'weight': 400,
+    'line-height': 140%,
+    'letter-spacing': 0,
+    'text-transform': false,
+  ),
+  'body-2': (
+    'size': 14px,
+    'weight': 400,
+    'line-height': 140%,
+    'letter-spacing': 0,
+    'text-transform': false,
+  ),
+);
