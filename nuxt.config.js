@@ -1,4 +1,3 @@
-import colors from 'vuetify/es5/util/colors';
 
 export default {
   head: {
@@ -25,9 +24,9 @@ export default {
 
   plugins: ['~/plugins/api.js'],
 
-  components: {
-    dirs: ['~/components/global/blocks'],
-  },
+  components: [
+    { path: '~/components/global/blocks', pathPrefix: '' }
+  ],
 
   buildModules: ['@nuxtjs/eslint-module', '@nuxtjs/vuetify'],
 
@@ -47,9 +46,12 @@ export default {
     watchLoggedIn: true,
     resetOnError: true,
     redirect: {
-      login: '/auth',
-      logout: '/',
+      login: '/',
+      logout: '/auth',
       home: '/',
+    },
+    vuex: {
+      namespace: 'authentication',
     },
     strategies: {
       local: {
@@ -70,12 +72,16 @@ export default {
         endpoints: {
           login: { url: '/auth/login/', method: 'post' },
           refresh: { url: '/auth/refresh/', method: 'post' },
-          user: { url: '/auth/user', method: 'get' },
+          user: { url: '/auth/user/', method: 'get' },
           logout: { url: '/auth/logout/', method: 'post' },
         },
         // autoLogout: false
       },
     },
+  },
+
+  router: {
+    middleware: ['auth'],
   },
 
   vuetify: {
@@ -85,7 +91,6 @@ export default {
       font: {
         family: 'Nunito',
       },
-      icons: false,
     },
     theme: {
       dark: false,

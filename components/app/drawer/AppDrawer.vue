@@ -1,6 +1,6 @@
 <template>
   <client-only>
-    <v-navigation-drawer v-model="drawer" absolute app>
+    <v-navigation-drawer v-model="drawer" :width="$vuetify.breakpoint.mdAndUp ? '50%' : '100%'" disable-route-watcher fixed temporary app>
       <v-list>
         <!-- <v-list-item v-for="(item, i) in items" :key="i" :to="item.to" router exact>
         <v-list-item-action>

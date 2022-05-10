@@ -1,27 +1,26 @@
 <template>
   <v-form ref="form" v-model="valid" class="v-auth-form">
-    <h2 class="text-h1 mb-3">{{ forgot ? 'Reset your password' : 'Login' }}</h2>
+    <h2 class="text-h1 mb-3">Sing up</h2>
     <div class="text-body-2 grey--text mb-6">Sign in with your data that you entered during your registration.</div>
     <div v-if="isMessage" class="v-auth-form__message text-body-2 red--text">
       <p v-for="(message, i) of messages" :key="`msg_${message}_${i}`">{{ message }}</p>
     </div>
-    <v-text-field v-model="form.email" class="mb-2" outlined label="Email" required :rules="getRules('email')" />
-    <v-text-field v-if="!forgot" v-model="form.password" class="mb-2" type="password" outlined label="Password" required :rules="getRules('password')" @keypress.enter="onSubmit" />
+    <v-text-field v-model="form.firstName" class="mb-2" :rules="getRules('firstName')" outlined label="First name" required />
+    <v-text-field v-model="form.email" class="mb-2" :rules="getRules('email')" outlined label="Email" required />
+    <v-text-field v-model="form.password" class="mb-2" type="password" :rules="getRules('password')" outlined label="Password" required />
+    <v-text-field v-model="form.confirmPassword" class="mb-2" type="password" outlined label="Confirm password" required :rules="getRules('confirmPassword')" />
     <div class="mb-6">
-      <v-btn color="primary" :disabled="!valid" :loading="loading" block @click="onSubmit"> {{ forgot ? 'Send password reset email' : 'Login' }} </v-btn>
-    </div>
-    <div class="mb-6">
-      <v-btn color="primary" block text plain @click="onForgot"> {{ forgot ? 'Login' : 'Forgot password' }} </v-btn>
+      <v-btn color="primary" :disabled="!valid" :loading="loading" block @click="onSubmit"> Register </v-btn>
     </div>
     <div class="text-body-2 text-center">
-      Don’t have an account?
-      <a-link to="/registration" class="primary--text"> Sign up </a-link>
+      Do you have an account?
+      <a-link to="/auth" class="primary--text"> Sign in </a-link>
     </div>
   </v-form>
 </template>
 
 <script>
-import { required, email } from '@/utils/validation';
+import { required, email, same, min } from '@/utils/validation';
 export default {
   layout: 'auth',
   props: {
@@ -42,9 +41,10 @@ export default {
     forgot: false,
     valid: true,
     form: {
-      name: '',
+      firstName: '',
       email: '',
       password: '',
+      confirmPassword: '',
     },
   }),
   computed: {
@@ -54,8 +54,10 @@ export default {
   },
   methods: {
     getRules(field) {
+      if (field === 'firstName') return [required(), min(2)];
       if (field === 'email') return [required(), email()];
-      if (field === 'password') return [required()];
+      if (field === 'password') return [required(), min(6)];
+      if (field === 'confirmPassword') return [required(), same(this.form.password)];
     },
     getError(param) {
       return this.errors.filter(i => i.param === param).map(i => i.msg);
@@ -64,7 +66,7 @@ export default {
       this.$emit('clear', param);
     },
     onSubmit() {
-      this.$emit('submit', { type: this.forgot ? 'restore' : 'login', data: this.form });
+      this.$emit('submit', { data: this.form });
     },
     onForgot() {
       this.$emit('clear', null);

@@ -23,5 +23,8 @@ export default {
 .v-list-empty {
   position: relative;
   padding: 0 !important;
+  li {
+    list-style-type: none;
+  }
 }
 </style>

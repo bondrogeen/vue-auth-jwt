@@ -6,7 +6,7 @@
       </div>
     </v-col>
     <v-col cols="12" md="7" class="d-none d-md-flex page-auth__right">
-      <div>1</div>
+      <div></div>
     </v-col>
   </v-row>
 </template>
@@ -16,17 +16,19 @@ import { mapActions } from 'vuex';
 import VAuthForm from '@/components/blocks/auth/VAuthForm';
 export default {
   name: 'IndexPage',
+  auth: false,
   components: {
     VAuthForm,
   },
   layout: 'auth',
+  middleware: ['loggedIn'],
   data: () => ({
     errors: [],
     messages: [],
     loading: false,
   }),
   methods: {
-    ...mapActions('user', ['login', 'restore']),
+    ...mapActions('auth', ['login', 'restore']),
     onClear(param) {
       this.errors = this.errors.filter(i => i.param !== param);
       if (!param) {
@@ -43,6 +45,7 @@ export default {
       this[type](data)
         .then(res => {
           console.log(res);
+          if (res?.data?.accessToken) this.$router.push('/');
         })
         .catch(e => {
           this.errors = e?.response?.data?.errors || [];

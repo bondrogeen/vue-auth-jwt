@@ -1,39 +1,23 @@
 const resource = 'user';
 export default {
   state: () => ({
-    content: {},
+    data: {},
   }),
   mutations: {
-    SET_CONTENT(state, value) {
-      state.content = value;
+    SET_DATA(state, value) {
+      state.data = value;
     },
   },
   actions: {
-    async login({ commit }, data) {
-      console.log(data);
-      return await this.$auth.loginWith('local', { data });
-    },
-    async logout() {
-      return await this.$auth.logout();
-    },
-    async register({ commit }, data) {
-      try {
-        return await this.$api.post('auth/register', { data });
-      } catch (error) {}
-    },
-    async restore({ commit }, data) {
-      try {
-        return await this.$api.post('auth/register', data);
-      } catch (error) {}
-    },
-    async get({ commit }, data) {
-      return await this.$api.get(`${resource}`, data);
+    async get({ commit }) {
+      const { data } = await this.$api.get(`${resource}`);
+      commit('SET_DATA', data);
+      return data;
     },
     async getById({ commit }, { id, data }) {
       return await this.$api.get(`${resource}/${id}`, data);
     },
     async update({ commit }, { id, data }) {
-      console.log({ id, data });
       return await this.$api.put(`${resource}/${id}`, data);
     },
     async remove({ commit }, { id, data }) {
@@ -41,6 +25,6 @@ export default {
     },
   },
   getters: {
-    getContent: ({ content }) => content || {},
+    getData: ({ data }) => data || {},
   },
 };
