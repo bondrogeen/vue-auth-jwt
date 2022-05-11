@@ -4,7 +4,9 @@ export default {
   state: () => ({}),
   mutations: {},
   actions: {
-    async nuxtServerInit ({ state, dispatch }) { },
+    async nuxtServerInit ({ state, dispatch }) { 
+      await dispatch('content/get')
+    },
   },
   getters: {}
 }
