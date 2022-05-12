@@ -1,3 +1,4 @@
+import { getRoles } from '@/utils/helpers';
 const resource = 'auth';
 export default {
   actions: {
@@ -19,6 +20,10 @@ export default {
     },
   },
   getters: {
-    getUser: (state, getters, rootState) => rootState?.authentication?.user || {},
+    getUser: (state, getters, rootState) => {
+      const user = rootState?.authentication?.user || {};
+      const roles = rootState?.content?.data?.roles || [];
+      return { ...user, ...getRoles(roles, user?.role || 0) };
+    },
   },
 };

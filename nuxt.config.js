@@ -25,7 +25,8 @@ export default {
   plugins: ['~/plugins/api.js'],
 
   components: [
-    { path: '~/components/global/blocks', pathPrefix: '' }
+    { path: '~/components/global/blocks', pathPrefix: '' },
+    { path: '~/components/global/forms', pathPrefix: '' }
   ],
 
   buildModules: ['@nuxtjs/eslint-module', '@nuxtjs/vuetify'],

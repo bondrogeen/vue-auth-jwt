@@ -1,27 +1,24 @@
 <template>
-  <div class="a-profile-list d-sm-flex py-3" :class="{ 'a-profile-list--active': active }">
-    <div class="mr-2">
-      <AppHeaderIcon size="small">
+  <div class="a-users-list d-sm-flex py-3" :class="{ 'a-users-list--active': active }">
+    <div class="a-users-list__icon mr-2" @click="$emit('select', $event)">
+      <a-checkbox v-if="selected" :value="selected" :checked="selected"></a-checkbox>
+      <AppHeaderIcon v-else size="small">
         <v-icon color="primary" size="20"> mdi-account-circle-outline </v-icon>
       </AppHeaderIcon>
     </div>
     <div>
-      <div class="a-profile-list__title text-body-1">
+      <div class="a-users-list__title text-body-1">
         <span>{{ fullName }}</span>
         <span v-if="isYou" class="green--text">You</span>
       </div>
       <div class="text-body-2 grey--text">
         <span>{{ email }}</span>
-        <span class="grey--text">({{ role }}) </span>
+        <span class="grey--text">({{ getRole }}) </span>
       </div>
     </div>
     <v-spacer></v-spacer>
-    <div>
+    <div class="align-self-end">
       <div class="text-sm-right text-caption mb-1">{{ date }}</div>
-      <div v-if="isEdit" class="text-sm-right">
-        <v-icon color="grey" size="18"> mdi-pencil-outline </v-icon>
-        <v-icon v-if="!isYou" color="grey" size="18"> mdi-trash-can-outline </v-icon>
-      </div>
     </div>
   </div>
 </template>
@@ -50,9 +47,9 @@ export default {
       type: String,
       default: '',
     },
-    roles: {
-      type: Array,
-      default: () => [],
+    role: {
+      type: Number,
+      default: 0,
     },
     icon: {
       type: String,
@@ -70,20 +67,27 @@ export default {
       type: Object,
       default: () => ({}),
     },
+    roles: {
+      type: Array,
+      default: () => [],
+    },
+    selected: {
+      type: Boolean,
+      default: false,
+    },
   },
   computed: {
     fullName() {
       return `${this.firstName} ${this.lastName}`;
     },
-    role() {
-      return this.roles?.[0]?.value || '';
-    },
-    isEdit() {
-      const roles = (this.user?.roles || []).map(i => i.value);
-      return Boolean(roles.includes('admin'));
-    },
     isYou() {
       return Boolean(this.user?.id === this.id);
+    },
+    getRole() {
+      return this.roles
+        .filter(i => i.value & this.role)
+        .map(i => i.name)
+        .join(',');
     },
     date() {
       const date = new Date(this.updatedAt);
@@ -100,8 +104,18 @@ export default {
 </script>
 
 <style lang="scss">
-.a-profile-list {
+.a-users-list {
   position: relative;
+  padding: 0 20px;
+  &:hover {
+    background-color: map-get($grey, 'lighten-1');
+  }
+  &__icon {
+    flex: 0 0 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   &__title {
     font-weight: 700 !important;
   }

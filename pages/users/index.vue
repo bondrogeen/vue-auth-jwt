@@ -1,9 +1,9 @@
 <template>
   <v-container class="page-users">
     <v-row>
-      <v-col cols="12" md="4" class="page-users__menu">1 </v-col>
+      <v-col cols="12" md="4" class="page-users__menu"> </v-col>
       <v-col cols="12" md="8">
-        <ABlockUsers :users="users" />
+        <ABlockUsers v-bind="{ users, roles, user }" />
       </v-col>
     </v-row>
   </v-container>
@@ -30,7 +30,12 @@ export default {
   computed: {
     ...mapGetters({
       data: 'user/getData',
+      user: 'auth/getUser',
+      content: 'content/getData',
     }),
+    roles() {
+      return this.content?.roles || [];
+    },
     users() {
       return this.data?.users || [];
     },
