@@ -1,9 +1,9 @@
 <template>
   <a-card-block class="a-profile-list d-flex py-3" :class="{ 'a-profile-list--active': active }">
     <div class="mr-2">
-      <AppHeaderIcon size="small">
+      <app-header-icon size="small">
         <v-icon color="primary" size="20"> {{ icon }} </v-icon>
-      </AppHeaderIcon>
+      </app-header-icon>
     </div>
     <div>
       <div class="a-profile-list__title text-body-1">{{ title }}</div>
@@ -13,12 +13,8 @@
 </template>
 
 <script>
-import AppHeaderIcon from '@/components/app/header/AppHeaderIcon';
 export default {
   name: 'PageProfile',
-  components: {
-    AppHeaderIcon,
-  },
   props: {
     title: {
       type: String,

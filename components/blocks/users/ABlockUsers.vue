@@ -1,16 +1,17 @@
 <template>
   <div class="a-block-users">
-    <div class="d-flex align-center">
-      <h1>Users</h1>
-      <v-spacer></v-spacer>
-      <AppHeaderIcon size="small">
-        <v-icon color="primary" size="20"> mdi-plus </v-icon>
-      </AppHeaderIcon>
-      <AppHeaderIcon v-if="selected.length" class="ml-2" size="small">
-        <v-icon color="red" size="20"> mdi-delete </v-icon>
-      </AppHeaderIcon>
-    </div>
     <a-card-block class="pa-0 overflow-hidden">
+      <template #header>
+        <div class="d-flex align-center">
+          <v-spacer></v-spacer>
+          <app-header-icon size="small">
+            <v-icon color="primary" size="20"> mdi-plus </v-icon>
+          </app-header-icon>
+          <app-header-icon v-if="selected.length" class="ml-2" size="small">
+            <v-icon color="red" size="20"> mdi-delete </v-icon>
+          </app-header-icon>
+        </div>
+      </template>
       <a-list v-slot="{ item }" class="a-block-users__list" :list="users">
         <AUsersList v-bind="{ ...item, user, roles }" :selected="isSelected(item)" @select="onSelect(item)" />
       </a-list>
@@ -19,11 +20,9 @@
 </template>
 <script>
 import AUsersList from '@/components/blocks/users/AUsersList';
-import AppHeaderIcon from '@/components/app/header/AppHeaderIcon';
 export default {
   components: {
     AUsersList,
-    AppHeaderIcon,
   },
   props: {
     users: {

@@ -1,12 +1,8 @@
 <template>
-  <v-container class="page-users">
-    <v-row>
-      <v-col cols="12" md="4" class="page-users__menu"> </v-col>
-      <v-col cols="12" md="8">
-        <ABlockUsers v-bind="{ users, roles, user }" />
-      </v-col>
-    </v-row>
-  </v-container>
+  <div>
+    <h1 class="mb-6">Users</h1>
+    <ABlockUsers v-bind="{ users, roles, user }" />
+  </div>
 </template>
 
 <script>

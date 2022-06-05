@@ -2,9 +2,9 @@
   <div class="a-users-list d-sm-flex py-3" :class="{ 'a-users-list--active': active }">
     <div class="a-users-list__icon mr-2" @click="$emit('select', $event)">
       <a-checkbox v-if="selected" :value="selected" :checked="selected"></a-checkbox>
-      <AppHeaderIcon v-else size="small">
+      <app-header-icon v-else size="small">
         <v-icon color="primary" size="20"> mdi-account-circle-outline </v-icon>
-      </AppHeaderIcon>
+      </app-header-icon>
     </div>
     <div>
       <div class="a-users-list__title text-body-1">
@@ -24,12 +24,9 @@
 </template>
 
 <script>
-import AppHeaderIcon from '@/components/app/header/AppHeaderIcon';
+
 export default {
   name: 'PageProfile',
-  components: {
-    AppHeaderIcon,
-  },
   props: {
     id: {
       type: String,

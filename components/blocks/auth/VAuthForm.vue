@@ -1,6 +1,6 @@
 <template>
   <v-form ref="form" v-model="valid" class="v-auth-form">
-    <h2 class="text-h1 mb-3">{{ forgot ? 'Reset your password' : 'Login' }}</h2>
+    <h2 class="text-h2 text-lg-h1 mb-3">{{ forgot ? 'Reset your password' : 'Login' }}</h2>
     <div class="text-body-2 grey--text mb-6">Sign in with your data that you entered during your registration.</div>
     <div v-if="isMessage" class="v-auth-form__message text-body-2 red--text">
       <p v-for="(message, i) of messages" :key="`msg_${message}_${i}`">{{ message }}</p>
@@ -68,6 +68,7 @@ export default {
     },
     onForgot() {
       this.$emit('clear', null);
+      this.$refs.form.reset()
       this.forgot = !this.forgot;
     },
   },
