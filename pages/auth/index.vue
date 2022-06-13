@@ -48,6 +48,7 @@ export default {
           if (res?.data?.accessToken) this.$router.push('/');
         })
         .catch(e => {
+          console.log(e)
           this.errors = e?.response?.data?.errors || [];
           this.messages = e?.response?.data?.messages || [];
         })

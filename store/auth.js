@@ -9,9 +9,7 @@ export default {
       return await this.$auth.logout();
     },
     async register({ commit }, data) {
-      try {
-        return await this.$api.post(`${resource}/register`, data);
-      } catch (error) {}
+      return await this.$api.post(`${resource}/register`, data);
     },
     async restore({ commit }, data) {
       try {

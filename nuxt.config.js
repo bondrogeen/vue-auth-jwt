@@ -20,7 +20,9 @@ export default {
     post: process.env.NODE_ENV || 3000,
   },
 
-  css: [],
+  css: [
+    '~/assets/scss/index.scss',
+  ],
 
   plugins: ['~/plugins/api.js'],
 
@@ -86,7 +88,7 @@ export default {
   },
 
   vuetify: {
-    customVariables: ['~/assets/variables.scss'],
+    customVariables: ['~/assets/scss/variables.scss'],
     treeShake: true,
     defaultAssets: {
       font: {

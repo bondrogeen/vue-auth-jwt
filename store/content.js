@@ -11,11 +11,11 @@ export default {
   actions: {
     async get({ commit }) {
       const { data } = await this.$api.get(`${resource}`);
-      commit('SET_DATA', data);
+      commit('SET_DATA', data || {});
       return data;
     },
   },
   getters: {
-    getData: ({ data }) => data || {},
+    getData: ({ data }) => data,
   },
 };

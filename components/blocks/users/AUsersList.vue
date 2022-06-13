@@ -8,7 +8,11 @@
     </div>
     <div>
       <div class="a-users-list__title text-body-1">
-        <span>{{ fullName }}</span>
+        <span>
+          <nuxt-link :to="`/users/${id}`">
+            {{ fullName }}
+          </nuxt-link>
+        </span>
         <span v-if="isYou" class="green--text">You</span>
       </div>
       <div class="text-body-2 grey--text">
@@ -24,7 +28,6 @@
 </template>
 
 <script>
-
 export default {
   name: 'PageProfile',
   props: {
@@ -114,6 +117,7 @@ export default {
     justify-content: center;
   }
   &__title {
+    cursor: pointer;
     font-weight: 700 !important;
   }
 }

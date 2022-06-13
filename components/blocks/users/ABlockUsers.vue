@@ -4,7 +4,7 @@
       <template #header>
         <div class="d-flex align-center">
           <v-spacer></v-spacer>
-          <app-header-icon size="small">
+          <app-header-icon size="small" class="mr-4" @click="$router.push('/users/new')">
             <v-icon color="primary" size="20"> mdi-plus </v-icon>
           </app-header-icon>
           <app-header-icon v-if="selected.length" class="ml-2" size="small">

@@ -1,18 +1,27 @@
 export default {
   state: () => ({
-    connection: true,
+    dialog: true,
+    dialogData: {},
   }),
   mutations: {
-    SET_CONNECTION(state, value) {
-      state.connection = value;
+    SET_DIALOG(state, value) {
+      state.dialog = value;
+    },
+    SET_DIALOG_DATA(state, value) {
+      state.dialogData = value;
     },
   },
   actions: {
-    setConnection({ commit, state: { controller } }, value) {
-      commit('SET_CONNECTION', value);
+    setMessage({ commit }, data) {
+      commit('SET_DIALOG_DATA', data);
+      commit('SET_DIALOG', true);
+    },
+    setDialog({ commit }, value) {
+      commit('SET_DIALOG', value);
     },
   },
   getters: {
-    getUpdate: ({ update }) => update,
+    getDialog: ({ dialog }) => dialog,
+    getDialogData: ({ dialogData }) => dialogData,
   },
 };

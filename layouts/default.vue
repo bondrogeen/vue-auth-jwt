@@ -2,11 +2,12 @@
   <v-app class="layout-def">
     <AppDrawer v-model="drawer" />
     <AppHeader v-model="drawer" />
+    <AppDialog />
     <v-main class="">
       <v-container class="page-main">
         <v-row>
           <v-col cols="12" md="3" class="d-none d-md-block">
-            <AppMenu class="layout-def__menu"/>
+            <AppMenu class="layout-def__menu" />
           </v-col>
           <v-col cols="12" md="9" lg="8" offset-lg="1">
             <Nuxt />
@@ -22,6 +23,7 @@
 import AppDrawer from '@/components/app/drawer/AppDrawer';
 import AppHeader from '@/components/app/header/AppHeader';
 import AppFooter from '@/components/app/footer/AppFooter';
+import AppDialog from '@/components/app/dialog/AppDialog';
 import AppMenu from '@/components/app/menu/AppMenu';
 export default {
   name: 'DefaultLayout',
@@ -30,6 +32,7 @@ export default {
     AppHeader,
     AppFooter,
     AppMenu,
+    AppDialog,
   },
   data: () => ({
     drawer: false,

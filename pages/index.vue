@@ -20,6 +20,7 @@ export default {
     try {
       await store.dispatch('user/get');
     } catch (e) {
+      console.log(e)
       error({ status: e?.response?.status || 444, messages: e?.response?.data || e?.toString() || {} });
     }
   },
